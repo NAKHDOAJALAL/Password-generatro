@@ -1,0 +1,69 @@
+<!-- generator/templates/generator/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .options {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="number" name="length" placeholder="Enter password length" min="1" max="20">
+            
+            <div class="options">
+                <label><input type="checkbox" name="uppercase" checked> Include Uppercase Letters</label><br>
+                <label><input type="checkbox" name="lowercase" checked> Include Lowercase Letters</label><br>
+                <label><input type="checkbox" name="numbers" checked> Include Numbers</label><br>
+                <label><input type="checkbox" name="special" checked> Include Special Characters</label>
+            </div>
+
+            <button type="submit">Generate Password</button>
+        </form>
+        {% if password %}
+            <input type="text" value="{{ password }}" readonly>
+        {% endif %}
+    </div>
+</body>
+</html>
